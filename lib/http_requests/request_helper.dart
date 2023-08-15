@@ -42,6 +42,7 @@ class HttpRequestHelper {
 
       return {'status': false, 'data': jsonDecode(response.body)};
     } catch (e) {
+      print(e);
       return {
         'status': false,
         'data': {'message': 'An error occurred. Try again.'}

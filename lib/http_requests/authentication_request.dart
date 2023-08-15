@@ -1,7 +1,10 @@
 import 'dart:convert';
 
 import 'package:design_task/http_requests/request_helper.dart';
+import 'package:flutter/material.dart';
 
+import '../main.dart';
+import '../screens/landing/landing_page.dart';
 import '../shared/custom_dialog.dart';
 import '../shared/custom_loader.dart';
 
@@ -21,11 +24,11 @@ class AuthenticationRequest {
     await Future.delayed(const Duration(seconds: 5));
     await CustomLoader.dismissLoader();
     if (response['status']) {
-      // Navigator.pushNamedAndRemoveUntil(
-      //   MyApp.navigatorKey.currentContext!,
-      //   LandingPage.routeName,
-      //   (route) => false,
-      // );
+      Navigator.pushNamedAndRemoveUntil(
+        MyApp.navigatorKey.currentContext!,
+        LandingPage.routeName,
+        (route) => false,
+      );
     } else {
       showCustomDialog(
         response['data']['message'] ?? 'An error occurred',

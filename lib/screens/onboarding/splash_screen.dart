@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
     );
 
-    _verticalAnimation = Tween<double>(begin: 10, end: -10).animate(
+    _verticalAnimation = Tween<double>(begin: 15, end: -15).animate(
       CurvedAnimation(
         parent: _verticalController,
         curve: Curves.easeInOut,
