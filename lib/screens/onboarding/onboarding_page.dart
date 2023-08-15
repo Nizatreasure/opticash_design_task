@@ -3,6 +3,8 @@ import 'package:design_task/screens/authentication/sign_up/sign_up.dart';
 import 'package:design_task/shared/custom_button.dart';
 import 'package:flutter/material.dart';
 
+import '../authentication/sign_in/sign_in.dart';
+
 class OnboardingPage extends StatefulWidget {
   static const routeName = '/onboarding';
   const OnboardingPage({super.key});
@@ -99,7 +101,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      print('tapped');
+                      Navigator.pushReplacementNamed(
+                          context, SignInScreen.routeName);
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
