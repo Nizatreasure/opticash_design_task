@@ -41,6 +41,7 @@ dependencies:
   url_launcher: ^6.1.12
   email_validator: ^2.1.17
   flutter_spinkit: ^5.2.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +73,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/svg/landing/
+    - assets/svg/home/
+    - assets/images/home/
     - assets/images/authentication/
     - assets/images/onboarding/
     - assets/images/splash/
@@ -94,6 +98,7 @@ flutter:
         - asset: fonts/rogerex/RogerexMedium-PKm9x.ttf
         - asset: fonts/rogerex/RogerexRegular-L32KD.ttf
         - asset: fonts/rogerex/RogerexSemiBold-X30Jj.ttf
+        - asset: fonts/rogerex/RogerexBold-7B7oR.ttf
 
     - family: Poppins
       fonts:
