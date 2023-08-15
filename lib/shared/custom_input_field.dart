@@ -13,6 +13,8 @@ class CustomInputField extends StatefulWidget {
   final void Function(String)? onChanged;
   final String? Function(String?)? validator;
   final AutovalidateMode autovalidateMode;
+  final TextCapitalization textCapitalization;
+  final TextInputType keyboardType;
   const CustomInputField({
     required this.controller,
     super.key,
@@ -22,6 +24,8 @@ class CustomInputField extends StatefulWidget {
     this.onTapSuffix,
     this.onChanged,
     this.inputFormatters = const [],
+    this.keyboardType = TextInputType.name,
+    this.textCapitalization = TextCapitalization.words,
     this.autovalidateMode = AutovalidateMode.onUserInteraction,
     this.validator,
   });
@@ -66,6 +70,8 @@ class _CustomInputFieldState extends State<CustomInputField> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             cursorColor: deepGreen,
             obscureText: !widget.showText,
+            keyboardType: widget.keyboardType,
+            textCapitalization: widget.textCapitalization,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
               floatingLabelBehavior: FloatingLabelBehavior.always,

@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 
 import '../main.dart';
 
-Future<bool> showCustomDialog(
+Future<void> showCustomDialog(
   String text, {
   required String buttonText,
   void Function()? onTap,
 }) async {
   ThemeData themeData = Theme.of(MyApp.navigatorKey.currentContext!);
   Size size = MediaQuery.of(MyApp.navigatorKey.currentContext!).size;
-  bool? returnValue = await showDialog(
+  return await showDialog(
     context: MyApp.navigatorKey.currentContext!,
     useRootNavigator: true,
     barrierDismissible: false,
@@ -83,6 +83,4 @@ Future<bool> showCustomDialog(
       );
     },
   );
-
-  return returnValue == true;
 }

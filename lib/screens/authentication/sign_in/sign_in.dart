@@ -1,5 +1,5 @@
+import 'package:design_task/http_requests/authentication_request.dart';
 import 'package:design_task/screens/authentication/sign_up/sign_up.dart';
-import 'package:design_task/shared/custom_loader.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +67,9 @@ class _SignInScreenState extends State<SignInScreen> {
                           const SizedBox(height: 15),
                           CustomInputField(
                             controller: _emailController,
+                            textCapitalization: TextCapitalization.none,
                             labelText: 'Email',
+                            keyboardType: TextInputType.emailAddress,
                             validator: (p0) {
                               return p0!.trim().isEmpty
                                   ? 'Email is required'
@@ -78,6 +80,8 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           CustomInputField(
                             controller: _passwordController,
+                            textCapitalization: TextCapitalization.none,
+                            keyboardType: TextInputType.visiblePassword,
                             labelText: 'Password',
                             isPassword: true,
                             showText: _showPassword,
@@ -95,12 +99,11 @@ class _SignInScreenState extends State<SignInScreen> {
                                   : null;
                             },
                           ),
-                          const SizedBox(height: 35),
+                          const SizedBox(height: 20),
                           Align(
                             alignment: Alignment.center,
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 20),
+                              padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
                               color: Colors.transparent,
                               child: Text(
                                 'Forgot password',
@@ -130,15 +133,15 @@ class _SignInScreenState extends State<SignInScreen> {
                               textAlign: TextAlign.center,
                             ),
                           ),
-                          const SizedBox(height: 15),
+                          const SizedBox(height: 30),
                           CustomButton(
                             text: 'SIGN IN',
                             onTap: () async {
                               if (_formKey.currentState?.validate() ?? false) {
-                                CustomLoader.showLoader();
-                                await Future.delayed(
-                                    const Duration(seconds: 5));
-                                await CustomLoader.dismissLoader();
+                                AuthenticationRequest.login(
+                                  email: _emailController.text.trim(),
+                                  password: _passwordController.text.trim(),
+                                );
                               }
                             },
                             textColor: Colors.white,

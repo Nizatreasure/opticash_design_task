@@ -1,3 +1,4 @@
+import 'package:design_task/http_requests/authentication_request.dart';
 import 'package:design_task/screens/authentication/sign_in/sign_in.dart';
 import 'package:design_task/shared/custom_back_button.dart';
 import 'package:design_task/shared/custom_button.dart';
@@ -92,6 +93,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           CustomInputField(
                             controller: _emailController,
                             labelText: 'Email',
+                            textCapitalization: TextCapitalization.none,
+                            keyboardType: TextInputType.emailAddress,
                             validator: (p0) {
                               return p0!.trim().isEmpty
                                   ? 'Email is required'
@@ -103,6 +106,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           CustomInputField(
                             controller: _passwordController,
                             labelText: 'Password',
+                            textCapitalization: TextCapitalization.none,
+                            keyboardType: TextInputType.visiblePassword,
                             isPassword: true,
                             showText: _showPassword,
                             onChanged: (p0) {
@@ -170,7 +175,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           const SizedBox(height: 15),
                           CustomButton(
                             text: 'CREATE NEW ACCOUNT',
-                            onTap: () {
+                            onTap: () async {
                               if (_formKey.currentState?.validate() ?? false) {
                                 if (activeIndex < 2) {
                                   showCustomDialog(
@@ -178,6 +183,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     buttonText: 'Close',
                                   );
                                   return;
+                                }
+                                bool response =
+                                    await AuthenticationRequest.register(
+                                  email: _emailController.text.trim(),
+                                  firstName: _firstNameController.text.trim(),
+                                  lastName: _lastNameController.text.trim(),
+                                  password: _passwordController.text.trim(),
+                                );
+
+                                if (response) {
+                                  await showCustomDialog(
+                                    'Account Created Successfully',
+                                    buttonText: 'Sign In',
+                                  );
+                                  handleTap();
                                 }
                               }
                             },

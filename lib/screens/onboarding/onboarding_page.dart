@@ -54,71 +54,77 @@ class _OnboardingPageState extends State<OnboardingPage> {
             flex: 3,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(right: 0.15 * size.width),
-                    child: Text(
-                      'Send Money faster than Imagined',
-                      style: themeData.textTheme.bodyLarge!
-                          .copyWith(color: Colors.white),
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  Container(
-                    margin: EdgeInsets.only(right: 0.2 * size.width),
-                    child: Text(
-                      'Opticash provides you the fastest remittance to send and receive money!',
-                      style: themeData.textTheme.bodyMedium!.copyWith(
-                        color: const Color(0xFFCFCFCF),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 0.043 * size.height),
-                  Row(
+              child: ScrollConfiguration(
+                behavior: const ScrollBehavior().copyWith(overscroll: false),
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Column(
                     children: [
-                      _progressIndicator(true),
-                      _progressIndicator(false),
-                      _progressIndicator(false),
-                    ],
-                  ),
-                  SizedBox(height: 0.04 * size.height),
-                  CustomButton(
-                    text: 'Create New Account',
-                    gradient: LinearGradient(
-                      end: const Alignment(1.00, -0.04),
-                      begin: const Alignment(-1, -0.04),
-                      colors: [
-                        livelyGreen,
-                        pastelYellow,
-                      ],
-                    ),
-                    textColor: black,
-                    onTap: () {
-                      Navigator.pushReplacementNamed(
-                          context, SignUpScreen.routeName);
-                    },
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacementNamed(
-                          context, SignInScreen.routeName);
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 30, vertical: 15),
-                      margin: const EdgeInsets.only(top: 10),
-                      child: Text(
-                        'Sign In',
-                        style: themeData.textTheme.bodyLarge!.copyWith(
-                          color: Colors.white,
-                          fontSize: 18,
-                          decoration: TextDecoration.underline,
+                      Container(
+                        margin: EdgeInsets.only(right: 0.15 * size.width),
+                        child: Text(
+                          'Send Money faster than Imagined',
+                          style: themeData.textTheme.bodyLarge!
+                              .copyWith(color: Colors.white),
                         ),
                       ),
-                    ),
-                  )
-                ],
+                      const SizedBox(height: 5),
+                      Container(
+                        margin: EdgeInsets.only(right: 0.2 * size.width),
+                        child: Text(
+                          'Opticash provides you the fastest remittance to send and receive money!',
+                          style: themeData.textTheme.bodyMedium!.copyWith(
+                            color: const Color(0xFFCFCFCF),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 0.043 * size.height),
+                      Row(
+                        children: [
+                          _progressIndicator(true),
+                          _progressIndicator(false),
+                          _progressIndicator(false),
+                        ],
+                      ),
+                      SizedBox(height: 0.04 * size.height),
+                      CustomButton(
+                        text: 'Create New Account',
+                        gradient: LinearGradient(
+                          end: const Alignment(1.00, -0.04),
+                          begin: const Alignment(-1, -0.04),
+                          colors: [
+                            livelyGreen,
+                            pastelYellow,
+                          ],
+                        ),
+                        textColor: black,
+                        onTap: () {
+                          Navigator.pushReplacementNamed(
+                              context, SignUpScreen.routeName);
+                        },
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacementNamed(
+                              context, SignInScreen.routeName);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 15),
+                          margin: const EdgeInsets.only(top: 10),
+                          child: Text(
+                            'Sign In',
+                            style: themeData.textTheme.bodyLarge!.copyWith(
+                              color: Colors.white,
+                              fontSize: 18,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
