@@ -1,4 +1,5 @@
 import 'package:design_task/screens/authentication/sign_up/sign_up.dart';
+import 'package:design_task/shared/custom_loader.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -132,8 +133,13 @@ class _SignInScreenState extends State<SignInScreen> {
                           const SizedBox(height: 15),
                           CustomButton(
                             text: 'SIGN IN',
-                            onTap: () {
-                              if (_formKey.currentState?.validate() ?? false) {}
+                            onTap: () async {
+                              if (_formKey.currentState?.validate() ?? false) {
+                                CustomLoader.showLoader();
+                                await Future.delayed(
+                                    const Duration(seconds: 5));
+                                await CustomLoader.dismissLoader();
+                              }
                             },
                             textColor: Colors.white,
                             color: const Color(0xFF0A0A0A),
