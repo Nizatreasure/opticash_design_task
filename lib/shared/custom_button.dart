@@ -8,6 +8,7 @@ class CustomButton extends StatelessWidget {
   final Color? color;
   final String text;
   final Color? textColor;
+  final void Function()? onTap;
   const CustomButton({
     this.radius = 5,
     this.width,
@@ -16,6 +17,7 @@ class CustomButton extends StatelessWidget {
     this.gradient,
     this.color,
     required this.text,
+    this.onTap,
     this.textColor,
   }) : assert(gradient != null || color != null,
             'Either color or gradient must be provided.');
@@ -23,19 +25,27 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
-    return Container(
-      width: width ?? double.infinity,
-      alignment: Alignment.center,
-      height: height,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(radius),
-        gradient: gradient,
-        color: color,
-      ),
-      child: Text(
-        text,
-        style: themeData.textTheme.bodyLarge!
-            .copyWith(color: textColor, fontSize: 16),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        if (onTap != null) {
+          onTap!();
+        }
+      },
+      child: Container(
+        width: width ?? double.infinity,
+        alignment: Alignment.center,
+        height: height,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(radius),
+          gradient: gradient,
+          color: color,
+        ),
+        child: Text(
+          text,
+          style: themeData.textTheme.bodyLarge!
+              .copyWith(color: textColor, fontSize: 16),
+        ),
       ),
     );
   }

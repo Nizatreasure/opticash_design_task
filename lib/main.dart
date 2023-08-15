@@ -1,4 +1,5 @@
 import 'package:design_task/helpers/theme.dart';
+import 'package:design_task/routes.dart';
 import 'package:design_task/screens/onboarding/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,6 +18,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  static final navigatorKey = GlobalKey<NavigatorState>();
   const MyApp({super.key});
 
   @override
@@ -33,7 +35,9 @@ class MyApp extends StatelessWidget {
         title: 'Opticash',
         theme: lightTheme,
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        initialRoute: SplashScreen.routeName,
+        onGenerateRoute: onGenerate,
+        navigatorKey: navigatorKey,
       ),
     );
   }

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'onboarding_page.dart';
 
 class SplashScreen extends StatefulWidget {
+  static const routeName = '/splash-screen';
   const SplashScreen({super.key});
 
   @override
@@ -39,13 +40,8 @@ class _SplashScreenState extends State<SplashScreen>
   controllerListener() async {
     setState(() {});
     if (_controller.isCompleted) {
-      Future.delayed(const Duration(seconds: 4)).then((value) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const OnboardingPage(),
-          ),
-        );
+      Future.delayed(const Duration(seconds: 3)).then((value) {
+        Navigator.pushReplacementNamed(context, OnboardingPage.routeName);
       });
     }
   }

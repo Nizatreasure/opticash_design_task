@@ -1,8 +1,10 @@
 import 'package:design_task/helpers/constants.dart';
+import 'package:design_task/screens/authentication/sign_up/sign_up.dart';
 import 'package:design_task/shared/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingPage extends StatefulWidget {
+  static const routeName = '/onboarding';
   const OnboardingPage({super.key});
 
   @override
@@ -90,6 +92,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       ],
                     ),
                     textColor: black,
+                    onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, SignUpScreen.routeName);
+                    },
                   ),
                   GestureDetector(
                     onTap: () {
