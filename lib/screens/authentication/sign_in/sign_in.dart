@@ -25,135 +25,143 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: themeData.scaffoldBackgroundColor,
-      body: SafeArea(
-        child: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image:
-                  AssetImage('assets/images/authentication/money-pattern.png'),
-              fit: BoxFit.cover,
-              opacity: 0.7,
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: themeData.scaffoldBackgroundColor,
+        body: SafeArea(
+          child: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                    'assets/images/authentication/money-pattern.png'),
+                fit: BoxFit.cover,
+                opacity: 0.7,
+              ),
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomBackButton(onTap: handleTap),
-              const SizedBox(height: 25),
-              Expanded(
-                child: ScrollConfiguration(
-                  behavior: const ScrollBehavior().copyWith(overscroll: false),
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Sign In',
-                            style: themeData.textTheme.bodyLarge,
-                          ),
-                          const SizedBox(height: 5),
-                          Container(
-                            margin: EdgeInsets.only(right: 0.13 * size.width),
-                            child: Text(
-                              'Sign In to your account using your email address and password',
-                              style: themeData.textTheme.bodyMedium,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomBackButton(onTap: handleTap),
+                const SizedBox(height: 25),
+                Expanded(
+                  child: ScrollConfiguration(
+                    behavior:
+                        const ScrollBehavior().copyWith(overscroll: false),
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Sign In',
+                              style: themeData.textTheme.bodyLarge,
                             ),
-                          ),
-                          const SizedBox(height: 15),
-                          CustomInputField(
-                            controller: _emailController,
-                            textCapitalization: TextCapitalization.none,
-                            labelText: 'Email',
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (p0) {
-                              return p0!.trim().isEmpty
-                                  ? 'Email is required'
-                                  : !EmailValidator.validate(p0)
-                                      ? 'Email is not valid'
-                                      : null;
-                            },
-                          ),
-                          CustomInputField(
-                            controller: _passwordController,
-                            textCapitalization: TextCapitalization.none,
-                            keyboardType: TextInputType.visiblePassword,
-                            labelText: 'Password',
-                            isPassword: true,
-                            showText: _showPassword,
-                            onChanged: (p0) {
-                              setState(() {});
-                            },
-                            onTapSuffix: () {
-                              setState(() {
-                                _showPassword = !_showPassword;
-                              });
-                            },
-                            validator: (p0) {
-                              return p0!.trim().isEmpty
-                                  ? 'Password is required'
-                                  : null;
-                            },
-                          ),
-                          const SizedBox(height: 20),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Container(
-                              padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
-                              color: Colors.transparent,
+                            const SizedBox(height: 5),
+                            Container(
+                              margin: EdgeInsets.only(right: 0.13 * size.width),
                               child: Text(
-                                'Forgot password',
+                                'Sign In to your account using your email address and password',
                                 style: themeData.textTheme.bodyMedium,
                               ),
                             ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Text.rich(
-                              TextSpan(
-                                text: 'Don‘t have an account? ',
-                                style: themeData.textTheme.bodyMedium,
-                                children: [
-                                  TextSpan(
-                                    text: 'Create Account ',
-                                    style:
-                                        themeData.textTheme.bodyLarge!.copyWith(
-                                      fontSize: 14,
-                                      decoration: TextDecoration.underline,
+                            const SizedBox(height: 15),
+                            CustomInputField(
+                              controller: _emailController,
+                              textCapitalization: TextCapitalization.none,
+                              labelText: 'Email',
+                              keyboardType: TextInputType.emailAddress,
+                              validator: (p0) {
+                                return p0!.trim().isEmpty
+                                    ? 'Email is required'
+                                    : !EmailValidator.validate(p0)
+                                        ? 'Email is not valid'
+                                        : null;
+                              },
+                            ),
+                            CustomInputField(
+                              controller: _passwordController,
+                              textCapitalization: TextCapitalization.none,
+                              keyboardType: TextInputType.visiblePassword,
+                              labelText: 'Password',
+                              isPassword: true,
+                              showText: _showPassword,
+                              onChanged: (p0) {
+                                setState(() {});
+                              },
+                              onTapSuffix: () {
+                                setState(() {
+                                  _showPassword = !_showPassword;
+                                });
+                              },
+                              validator: (p0) {
+                                return p0!.trim().isEmpty
+                                    ? 'Password is required'
+                                    : null;
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 0, 20, 8),
+                                color: Colors.transparent,
+                                child: Text(
+                                  'Forgot password',
+                                  style: themeData.textTheme.bodyMedium,
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Text.rich(
+                                TextSpan(
+                                  text: 'Don‘t have an account? ',
+                                  style: themeData.textTheme.bodyMedium,
+                                  children: [
+                                    TextSpan(
+                                      text: 'Create Account ',
+                                      style: themeData.textTheme.bodyLarge!
+                                          .copyWith(
+                                        fontSize: 14,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = handleTap,
                                     ),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = handleTap,
-                                  ),
-                                ],
+                                  ],
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
                             ),
-                          ),
-                          const SizedBox(height: 30),
-                          CustomButton(
-                            text: 'SIGN IN',
-                            onTap: () async {
-                              if (_formKey.currentState?.validate() ?? false) {
-                                AuthenticationRequest.login(
-                                  email: _emailController.text.trim(),
-                                  password: _passwordController.text.trim(),
-                                );
-                              }
-                            },
-                            textColor: Colors.white,
-                            color: const Color(0xFF0A0A0A),
-                          ),
-                        ],
+                            const SizedBox(height: 30),
+                            CustomButton(
+                              text: 'SIGN IN',
+                              onTap: () async {
+                                if (_formKey.currentState?.validate() ??
+                                    false) {
+                                  AuthenticationRequest.login(
+                                    email: _emailController.text.trim(),
+                                    password: _passwordController.text.trim(),
+                                  );
+                                }
+                              },
+                              textColor: Colors.white,
+                              color: const Color(0xFF0A0A0A),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

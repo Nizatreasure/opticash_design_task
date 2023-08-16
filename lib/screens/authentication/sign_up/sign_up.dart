@@ -41,217 +41,226 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 : strength <= 0.75
                     ? 3
                     : 4;
-    return Scaffold(
-      backgroundColor: themeData.scaffoldBackgroundColor,
-      body: SafeArea(
-        child: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image:
-                  AssetImage('assets/images/authentication/money-pattern.png'),
-              fit: BoxFit.cover,
-              opacity: 0.7,
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: themeData.scaffoldBackgroundColor,
+        body: SafeArea(
+          child: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                    'assets/images/authentication/money-pattern.png'),
+                fit: BoxFit.cover,
+                opacity: 0.7,
+              ),
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomBackButton(onTap: handleTap),
-              const SizedBox(height: 25),
-              Expanded(
-                child: ScrollConfiguration(
-                  behavior: const ScrollBehavior().copyWith(overscroll: false),
-                  child: SingleChildScrollView(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Create Account',
-                            style: themeData.textTheme.bodyLarge,
-                          ),
-                          const SizedBox(height: 5),
-                          Container(
-                            margin: EdgeInsets.only(right: 0.13 * size.width),
-                            child: Text(
-                              'Register a new account using your email address and fill in your information',
-                              style: themeData.textTheme.bodyMedium,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomBackButton(onTap: handleTap),
+                const SizedBox(height: 25),
+                Expanded(
+                  child: ScrollConfiguration(
+                    behavior:
+                        const ScrollBehavior().copyWith(overscroll: false),
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 5),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Create Account',
+                              style: themeData.textTheme.bodyLarge,
                             ),
-                          ),
-                          const SizedBox(height: 15),
-                          CustomInputField(
-                            controller: _firstNameController,
-                            labelText: 'First Name',
-                          ),
-                          CustomInputField(
-                            controller: _lastNameController,
-                            labelText: 'Last Name',
-                          ),
-                          CustomInputField(
-                            controller: _emailController,
-                            labelText: 'Email',
-                            textCapitalization: TextCapitalization.none,
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (p0) {
-                              return p0!.trim().isEmpty
-                                  ? 'Email is required'
-                                  : !EmailValidator.validate(p0)
-                                      ? 'Email is not valid'
-                                      : null;
-                            },
-                          ),
-                          CustomInputField(
-                            controller: _passwordController,
-                            labelText: 'Password',
-                            textCapitalization: TextCapitalization.none,
-                            keyboardType: TextInputType.visiblePassword,
-                            isPassword: true,
-                            showText: _showPassword,
-                            onChanged: (p0) {
-                              strength = estimatePasswordStrength(p0);
-                              setState(() {});
-                            },
-                            onTapSuffix: () {
-                              setState(() {
-                                _showPassword = !_showPassword;
-                              });
-                            },
-                            validator: (p0) {
-                              return p0!.trim().isEmpty
-                                  ? 'Password is required'
-                                  : null;
-                            },
-                          ),
-                          if (activeIndex > 0)
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20, top: 5),
-                              child: Row(
-                                children: [
-                                  ...List.generate(
-                                    4,
-                                    (index) => _indicator(index < activeIndex),
-                                  ),
-                                  const SizedBox(width: 6),
-                                  Text(
-                                    strengthText(activeIndex),
-                                    style: themeData.textTheme.bodyMedium!
-                                        .copyWith(
-                                      fontWeight: FontWeight.w500,
-                                      color: activeIndex < 2
-                                          ? const Color(0xFFE30101)
-                                          : const Color(0xFF759C00),
-                                      fontSize: 10,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          const SizedBox(height: 35),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Text.rich(
-                              TextSpan(
-                                text: 'Already have an account? ',
+                            const SizedBox(height: 5),
+                            Container(
+                              margin: EdgeInsets.only(right: 0.13 * size.width),
+                              child: Text(
+                                'Register a new account using your email address and fill in your information',
                                 style: themeData.textTheme.bodyMedium,
-                                children: [
-                                  TextSpan(
-                                    text: 'Sign In ',
-                                    style:
-                                        themeData.textTheme.bodyLarge!.copyWith(
-                                      fontSize: 14,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = handleTap,
-                                  ),
-                                ],
                               ),
-                              textAlign: TextAlign.center,
                             ),
-                          ),
-                          const SizedBox(height: 15),
-                          CustomButton(
-                            text: 'CREATE NEW ACCOUNT',
-                            onTap: () async {
-                              if (_formKey.currentState?.validate() ?? false) {
-                                if (activeIndex < 2) {
-                                  showCustomDialog(
-                                    'Password is too weak. Use a strong password to continue.',
-                                    buttonText: 'Close',
+                            const SizedBox(height: 15),
+                            CustomInputField(
+                              controller: _firstNameController,
+                              labelText: 'First Name',
+                            ),
+                            CustomInputField(
+                              controller: _lastNameController,
+                              labelText: 'Last Name',
+                            ),
+                            CustomInputField(
+                              controller: _emailController,
+                              labelText: 'Email',
+                              textCapitalization: TextCapitalization.none,
+                              keyboardType: TextInputType.emailAddress,
+                              validator: (p0) {
+                                return p0!.trim().isEmpty
+                                    ? 'Email is required'
+                                    : !EmailValidator.validate(p0)
+                                        ? 'Email is not valid'
+                                        : null;
+                              },
+                            ),
+                            CustomInputField(
+                              controller: _passwordController,
+                              labelText: 'Password',
+                              textCapitalization: TextCapitalization.none,
+                              keyboardType: TextInputType.visiblePassword,
+                              isPassword: true,
+                              showText: _showPassword,
+                              onChanged: (p0) {
+                                strength = estimatePasswordStrength(p0);
+                                setState(() {});
+                              },
+                              onTapSuffix: () {
+                                setState(() {
+                                  _showPassword = !_showPassword;
+                                });
+                              },
+                              validator: (p0) {
+                                return p0!.trim().isEmpty
+                                    ? 'Password is required'
+                                    : null;
+                              },
+                            ),
+                            if (activeIndex > 0)
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 20, top: 5),
+                                child: Row(
+                                  children: [
+                                    ...List.generate(
+                                      4,
+                                      (index) =>
+                                          _indicator(index < activeIndex),
+                                    ),
+                                    const SizedBox(width: 6),
+                                    Text(
+                                      strengthText(activeIndex),
+                                      style: themeData.textTheme.bodyMedium!
+                                          .copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        color: activeIndex < 2
+                                            ? const Color(0xFFE30101)
+                                            : const Color(0xFF759C00),
+                                        fontSize: 10,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            const SizedBox(height: 35),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Text.rich(
+                                TextSpan(
+                                  text: 'Already have an account? ',
+                                  style: themeData.textTheme.bodyMedium,
+                                  children: [
+                                    TextSpan(
+                                      text: 'Sign In ',
+                                      style: themeData.textTheme.bodyLarge!
+                                          .copyWith(
+                                        fontSize: 14,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = handleTap,
+                                    ),
+                                  ],
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            const SizedBox(height: 15),
+                            CustomButton(
+                              text: 'CREATE NEW ACCOUNT',
+                              onTap: () async {
+                                if (_formKey.currentState?.validate() ??
+                                    false) {
+                                  if (activeIndex < 2) {
+                                    showCustomDialog(
+                                      'Password is too weak. Use a strong password to continue.',
+                                      buttonText: 'Close',
+                                    );
+                                    return;
+                                  }
+                                  bool response =
+                                      await AuthenticationRequest.register(
+                                    email: _emailController.text.trim(),
+                                    firstName: _firstNameController.text.trim(),
+                                    lastName: _lastNameController.text.trim(),
+                                    password: _passwordController.text.trim(),
                                   );
-                                  return;
-                                }
-                                bool response =
-                                    await AuthenticationRequest.register(
-                                  email: _emailController.text.trim(),
-                                  firstName: _firstNameController.text.trim(),
-                                  lastName: _lastNameController.text.trim(),
-                                  password: _passwordController.text.trim(),
-                                );
 
-                                if (response) {
-                                  await showCustomDialog(
-                                    'Account Created Successfully',
-                                    buttonText: 'Sign In',
-                                  );
-                                  handleTap();
+                                  if (response) {
+                                    await showCustomDialog(
+                                      'Account Created Successfully',
+                                      buttonText: 'Sign In',
+                                    );
+                                    handleTap();
+                                  }
                                 }
-                              }
-                            },
-                            textColor: Colors.white,
-                            color: const Color(0xFF0A0A0A),
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 0.1 * size.width, vertical: 12),
-                            child: Text.rich(
-                              TextSpan(
-                                text: 'By signing up you agree to our ',
-                                style: themeData.textTheme.bodyMedium,
-                                children: [
-                                  TextSpan(
-                                    text: 'Terms of Use ',
-                                    style:
-                                        themeData.textTheme.bodyLarge!.copyWith(
-                                      fontSize: 14,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        privacyAndTerms(
-                                            'https://opticash.io/terms-condition.html');
-                                      },
-                                  ),
-                                  const TextSpan(text: 'and '),
-                                  TextSpan(
-                                    text: 'Privacy Policy',
-                                    style:
-                                        themeData.textTheme.bodyLarge!.copyWith(
-                                      fontSize: 14,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        privacyAndTerms(
-                                            'https://opticash.io/privacy-policy.html');
-                                      },
-                                  )
-                                ],
-                              ),
-                              textAlign: TextAlign.center,
+                              },
+                              textColor: Colors.white,
+                              color: const Color(0xFF0A0A0A),
                             ),
-                          )
-                        ],
+                            Container(
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 0.1 * size.width, vertical: 12),
+                              child: Text.rich(
+                                TextSpan(
+                                  text: 'By signing up you agree to our ',
+                                  style: themeData.textTheme.bodyMedium,
+                                  children: [
+                                    TextSpan(
+                                      text: 'Terms of Use ',
+                                      style: themeData.textTheme.bodyLarge!
+                                          .copyWith(
+                                        fontSize: 14,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          privacyAndTerms(
+                                              'https://opticash.io/terms-condition.html');
+                                        },
+                                    ),
+                                    const TextSpan(text: 'and '),
+                                    TextSpan(
+                                      text: 'Privacy Policy',
+                                      style: themeData.textTheme.bodyLarge!
+                                          .copyWith(
+                                        fontSize: 14,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          privacyAndTerms(
+                                              'https://opticash.io/privacy-policy.html');
+                                        },
+                                    )
+                                  ],
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
