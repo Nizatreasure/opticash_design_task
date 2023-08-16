@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Hello, Niza!',
+                        'Hello, ${userData['first_name']}!',
                         style: themeData.textTheme.bodyLarge!.copyWith(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage>
                         ),
                       ),
                       Text(
-                        '@nizatreasure',
+                        '@${userData['user_name']}',
                         style: themeData.textTheme.bodyMedium!
                             .copyWith(fontSize: 12),
                       )

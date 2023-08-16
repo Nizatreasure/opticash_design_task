@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
@@ -35,11 +36,17 @@ class HttpRequestHelper {
           );
           break;
       }
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         return {'status': true, 'data': jsonDecode(response.body)['data']};
       }
 
       return {'status': false, 'data': jsonDecode(response.body)};
+    } on SocketException catch (_) {
+      return {
+        'status': false,
+        'data': {'message': 'No internet connection'}
+      };
     } catch (e) {
       return {
         'status': false,

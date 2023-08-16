@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:design_task/http_requests/request_helper.dart';
 import 'package:flutter/material.dart';
 
+import '../helpers/constants.dart';
 import '../main.dart';
 import '../screens/landing/landing_page.dart';
 import '../shared/custom_dialog.dart';
@@ -24,6 +25,8 @@ class AuthenticationRequest {
     await Future.delayed(const Duration(seconds: 5));
     await CustomLoader.dismissLoader();
     if (response['status']) {
+      userData = response['data']['user'];
+
       Navigator.pushNamedAndRemoveUntil(
         MyApp.navigatorKey.currentContext!,
         LandingPage.routeName,

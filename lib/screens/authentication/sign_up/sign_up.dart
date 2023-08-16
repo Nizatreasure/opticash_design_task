@@ -41,6 +41,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 : strength <= 0.75
                     ? 3
                     : 4;
+
+    print(activeIndex);
     return Scaffold(
       backgroundColor: themeData.scaffoldBackgroundColor,
       body: SafeArea(
@@ -125,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   : null;
                             },
                           ),
-                          if (activeIndex > 0)
+                          if (_passwordController.text.isNotEmpty)
                             Padding(
                               padding: const EdgeInsets.only(left: 20, top: 5),
                               child: Row(
