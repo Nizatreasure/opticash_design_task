@@ -188,7 +188,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 }
                                 bool response =
                                     await AuthenticationRequest.register(
-                                  email: _emailController.text.trim(),
+                                  email: _emailController.text
+                                      .trim()
+                                      .toLowerCase(),
                                   firstName: _firstNameController.text.trim(),
                                   lastName: _lastNameController.text.trim(),
                                   password: _passwordController.text.trim(),

@@ -139,7 +139,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             onTap: () async {
                               if (_formKey.currentState?.validate() ?? false) {
                                 AuthenticationRequest.login(
-                                  email: _emailController.text.trim(),
+                                  email: _emailController.text
+                                      .trim()
+                                      .toLowerCase(),
                                   password: _passwordController.text.trim(),
                                 );
                               }
