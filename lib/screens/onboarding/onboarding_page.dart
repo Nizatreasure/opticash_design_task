@@ -25,7 +25,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           Expanded(
             flex: 4,
             child: Stack(
-              alignment: const Alignment(0, -0.1),
+              alignment: Alignment.center,
               children: [
                 Positioned(
                   top: 0.04 * size.height,

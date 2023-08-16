@@ -174,9 +174,11 @@ class _HomePageState extends State<HomePage>
               SliverPadding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 sliver: SliverList.builder(
-                    itemCount: 2,
+                    itemCount: _users.length,
                     itemBuilder: (_, index) {
-                      return _transactionContainer();
+                      return _transactionContainer(
+                          name: _users[index]['name'],
+                          amount: _users[index]['amount']);
                     }),
               )
             ],
@@ -407,12 +409,12 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget _transactionContainer() {
+  Widget _transactionContainer({required String name, required int amount}) {
     ThemeData themeData = Theme.of(context);
     return Container(
       height: 66,
       padding: const EdgeInsets.all(12),
-      margin: EdgeInsets.only(bottom: 8),
+      margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
         color: const Color(0xFFFBFBFB),
         borderRadius: BorderRadius.circular(10),
@@ -436,7 +438,7 @@ class _HomePageState extends State<HomePage>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Transfer to John',
+                      'Transfer to $name',
                       style: themeData.textTheme.bodyMedium!.copyWith(
                         color: const Color(0xFF273240),
                         fontSize: 12,
@@ -444,7 +446,7 @@ class _HomePageState extends State<HomePage>
                       ),
                     ),
                     Text(
-                      '-N${NumberFormat().format(1850)}',
+                      '-N${NumberFormat().format(amount)}',
                       style: themeData.textTheme.bodyMedium!.copyWith(
                         color: const Color(0xFFD82C0D),
                         fontSize: 12,
@@ -489,6 +491,11 @@ class _HomePageState extends State<HomePage>
       ),
     );
   }
+
+  final List<Map<String, dynamic>> _users = [
+    {'name': 'John', 'amount': 1850},
+    {'name': 'Peter', 'amount': 2500},
+  ];
 
   @override
   bool get wantKeepAlive => true;

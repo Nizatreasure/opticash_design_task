@@ -1,6 +1,6 @@
 import 'package:design_task/helpers/theme.dart';
 import 'package:design_task/routes.dart';
-import 'package:design_task/screens/onboarding/splash_screen.dart';
+import 'package:design_task/screens/landing/landing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         title: 'Opticash',
         theme: lightTheme,
         debugShowCheckedModeBanner: false,
-        initialRoute: SplashScreen.routeName,
+        initialRoute: LandingPage.routeName,
         onGenerateRoute: onGenerate,
         navigatorKey: navigatorKey,
       ),

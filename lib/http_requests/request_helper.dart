@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 String baseUrl = 'https://devapi.opticash.io/api/v1/';
 
-enum RequestType { get, post, put, delete }
+enum RequestType { get, post }
 
 class HttpRequestHelper {
   static Future<Map<String, dynamic>> makeRequest({
@@ -35,14 +35,12 @@ class HttpRequestHelper {
           );
           break;
       }
-      print(jsonDecode(response.body));
       if (response.statusCode == 200 || response.statusCode == 201) {
         return {'status': true, 'data': jsonDecode(response.body)['data']};
       }
 
       return {'status': false, 'data': jsonDecode(response.body)};
     } catch (e) {
-      print(e);
       return {
         'status': false,
         'data': {'message': 'An error occurred. Try again.'}

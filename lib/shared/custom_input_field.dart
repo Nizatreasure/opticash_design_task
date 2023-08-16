@@ -71,7 +71,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
             cursorColor: deepGreen,
             obscureText: !widget.showText,
             keyboardType: widget.keyboardType,
-            obscuringCharacter: '⚫',
+            obscuringCharacter: '\u26AB',
             textCapitalization: widget.textCapitalization,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
