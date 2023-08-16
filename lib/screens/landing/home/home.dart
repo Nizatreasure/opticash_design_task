@@ -153,7 +153,7 @@ class _HomePageState extends State<HomePage>
                         usePadding: false,
                         assetName: 'virtual-card',
                         text: 'Create Virtual Card and pay online with ease',
-                        size: const Size(110, 98),
+                        size: const Size(90, 90),
                       )
                     ],
                   ),
@@ -172,7 +172,7 @@ class _HomePageState extends State<HomePage>
                 ),
               ),
               SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 15),
                 sliver: SliverList.builder(
                     itemCount: _users.length,
                     itemBuilder: (_, index) {

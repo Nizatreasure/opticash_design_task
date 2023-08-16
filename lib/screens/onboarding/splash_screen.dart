@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'onboarding_page.dart';
 
 class SplashScreen extends StatefulWidget {
-  static const routeName = '/splash-screen';
+  static const routeName = '/';
   const SplashScreen({super.key});
 
   @override
