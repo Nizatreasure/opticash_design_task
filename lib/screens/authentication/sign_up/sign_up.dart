@@ -44,6 +44,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     return Scaffold(
       backgroundColor: themeData.scaffoldBackgroundColor,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
@@ -63,8 +64,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: ScrollConfiguration(
                   behavior: const ScrollBehavior().copyWith(overscroll: false),
                   child: SingleChildScrollView(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    padding: EdgeInsets.fromLTRB(20, 5, 20,
+                        5 + MediaQuery.of(context).viewInsets.bottom),
                     child: Form(
                       key: _formKey,
                       child: Column(
