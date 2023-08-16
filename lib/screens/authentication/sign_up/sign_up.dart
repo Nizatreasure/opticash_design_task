@@ -42,7 +42,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ? 3
                     : 4;
 
-    print(activeIndex);
     return Scaffold(
       backgroundColor: themeData.scaffoldBackgroundColor,
       body: SafeArea(
@@ -178,6 +177,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           CustomButton(
                             text: 'CREATE NEW ACCOUNT',
                             onTap: () async {
+                              setState(() {
+                                _showPassword = false;
+                              });
                               if (_formKey.currentState?.validate() ?? false) {
                                 if (activeIndex < 2) {
                                   showCustomDialog(
@@ -186,6 +188,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   );
                                   return;
                                 }
+
                                 bool response =
                                     await AuthenticationRequest.register(
                                   email: _emailController.text

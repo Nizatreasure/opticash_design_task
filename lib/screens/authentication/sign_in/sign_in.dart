@@ -137,6 +137,9 @@ class _SignInScreenState extends State<SignInScreen> {
                           CustomButton(
                             text: 'SIGN IN',
                             onTap: () async {
+                              setState(() {
+                                _showPassword = false;
+                              });
                               if (_formKey.currentState?.validate() ?? false) {
                                 AuthenticationRequest.login(
                                   email: _emailController.text
