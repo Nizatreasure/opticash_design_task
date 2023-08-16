@@ -30,8 +30,14 @@ class AuthenticationRequest {
         (route) => false,
       );
     } else {
+      dynamic result = response['data']['message'];
+      String message = result is String
+          ? result
+          : result is List
+              ? (result[0] ?? {})['message'] ?? 'An error occurred'
+              : 'An error occurred';
       showCustomDialog(
-        response['data']['message'] ?? 'An error occurred',
+        message,
         buttonText: 'Close',
       );
     }
